@@ -5,6 +5,9 @@ var barbe = [true, true, false, false, true];
 var haircolor = ["noir", "brun", "brun", "noir", "brun"];
 var eyescolor = ["marron", "gris", "gris", "marron", "gris"];
 var compteurclic = [0,0,0,0,0];
+var gamefinished = 0;
+var compteurnonclic = 0;
+var numimagenotclicked;
 var randomperso;
 var randomnumperso;
 var submitbutton;
@@ -12,18 +15,19 @@ var textbox;
 function onLoad(){
 submitbutton = document.getElementById("submit");
 textbox = document.getElementById("ask");
+textbox.value = "";
 persos = [document.getElementById("amixem"), document.getElementById("cyprien"), document.getElementById("norman"), document.getElementById("nozman"), document.getElementById("squeezie")];
 randomnumperso = Math.floor(Math.random() * 5);
 randomperso = persos[randomnumperso];
 answerwritter = document.createElement("p");
-answerwritter.innerHTML = randomperso.id;
+answerwritter.innerHTML = randomperso.id; // for debug purpose
 document.getElementById("div1").appendChild(answerwritter);
 submitbutton.addEventListener("click", onClickSubmitButton);
-persos[0].addEventListener("click", onClickAmixem);
-persos[1].addEventListener("click", onClickCyprien);
-persos[2].addEventListener("click", onClickNorman);
-persos[3].addEventListener("click", onClickNozman);
-persos[4].addEventListener("click", onClickSqueezie);
+persos[0].addEventListener("click", function(){onClickImages(persos[0].id);});
+persos[1].addEventListener("click", function(){onClickImages(persos[1].id);});
+persos[2].addEventListener("click", function(){onClickImages(persos[2].id);});
+persos[3].addEventListener("click", function(){onClickImages(persos[3].id);});
+persos[4].addEventListener("click", function(){onClickImages(persos[4].id);});
 
 }
 window.addEventListener("load", onLoad);
@@ -59,47 +63,49 @@ function onClickSubmitButton(){
 
 }
 
-function onClickAmixem(){
-	if(compteurclic[0] === 0){
-	var amixemcross = document.createElement("img");
-	amixemcross.src = "images/croix.png";
-	document.body.appendChild(amixemcross);
-	compteurclic[0]++;
-	}
+function onClickImages(id){
+    const cross = document.createElement("img");
+    cross.src = "images/croix.png";
+    if(id === "amixem" && compteurclic[0] === 0 && gamefinished === 0){
+        document.body.appendChild(cross);
+        compteurclic[0]++;
+    }else if(id === "cyprien" && compteurclic[1] === 0 && gamefinished === 0){
+        document.body.appendChild(cross);
+        compteurclic[1]++;
+    }else if(id === "norman" && compteurclic[2] ===  0 && gamefinished === 0){
+        document.body.appendChild(cross);
+        compteurclic[2]++;
+    }else if(id === "nozman" && compteurclic[3] === 0 && gamefinished === 0){
+        document.body.appendChild(cross);
+        compteurclic[3]++;
+    }else if(id === "squeezie" && compteurclic[4] === 0 && gamefinished === 0){
+        document.body.appendChild(cross);
+        compteurclic[4]++;
+    }
+    TestIfWinOrLoose();
 }
 
-function onClickCyprien(){
-	if(compteurclic[1] === 0){
-	var cypriencross = document.createElement("img");
-	cypriencross.src = "images/croix.png";
-	document.body.appendChild(cypriencross);
-	compteurclic[1]++;
-	}
-}
+function TestIfWinOrLoose(){
+    for(let i = 0; i < persos.length; i++){
+        if(compteurclic[i] === 0){
+            compteurnonclic++;
+        }
+    }
 
-function onClickNorman(){
-	if(compteurclic[2] === 0){
-	var normancross = document.createElement("img");
-	normancross.src = "images/croix.png";
-	document.body.appendChild(normancross);
-	compteurclic[2]++;
-	}
-}
+    if(compteurnonclic === 1){
+        gamefinished = 1;
 
-function onClickNozman(){
-	if(compteurclic[3] === 0){
-	var nozmancross = document.createElement("img");
-	nozmancross.src = "images/croix.png";
-	document.body.appendChild(nozmancross);
-	compteurclic[3]++;
-	}
-}
-
-function onClickSqueezie(){
-	if(compteurclic[4] === 0){
-	var squeeziecross = document.createElement("img");
-	squeeziecross.src = "images/croix.png";
-	document.body.appendChild(squeeziecross);
-	compteurclic[4]++;
-	}
+        for(let i = 0; i < persos.length; i++){
+            if(compteurclic[i] === 0){
+                numimagenotclicked = i;
+                break;
+            }
+        }
+        answerwritter.innerHTML = randomperso === persos[numimagenotclicked] ? "Vous avez gagné !" : "Vous avez perdu !";
+        answerwritter.innerHTML+= "<br>Génération d'une nouvelle partie votre page va se rafraichir dans 5 secondes.";
+        compteurnonclic = 0;
+        setTimeout(function () {location.reload();}, 5000);
+    }else{
+        compteurnonclic = 0;
+    }
 }
