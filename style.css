@@ -1,5 +1,65 @@
+body
+{
+    margin:0px 0;
+}
+
+h2
+{
+    font-size: 23px;
+    display: flex;
+    flex-direction: column;
+}
+
 img
 {
 	width: 300px;
 	height: 300px;
+}
+
+#amixem, #cyprien, #norman, #nozman, #squeezie
+{
+	border: 3px solid black;
+	margin-right: 1.75%;
+  margin-top: 1.75%;
+}
+
+
+#amixem:hover, #cyprien:hover, #norman:hover, #nozman:hover, #squeezie:hover
+{
+	border: 3px outset red;
+}
+
+#images
+{
+	display: flex;
+	flex-direction: row wrap;
+	justify-content: center;
+}
+
+header {
+  background-color:white;
+  box-shadow: 0 3px 3px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+footer {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  flex-wrap: wrap;
+  
+  background-color: white;
+  box-shadow: 0 -2px 5px;
+}
+
+body {
+	min-height:100vh; /* 1 */
+	display:flex; /* 2 */
+	flex-direction:column; /* 3 */
+}
+
+main {
+	flex-grow:1; /* 4 */
 }

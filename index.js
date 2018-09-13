@@ -33,28 +33,33 @@ persos[4].addEventListener("click", function(){onClickImages(persos[4].id);});
 window.addEventListener("load", onLoad);
 
 function onClickSubmitButton(){
-	if(textbox.value.toUpperCase() === "A T-IL DES LUNETTES ?" || textbox.value.toUpperCase() === "A T IL DES LUNETTES" || textbox.value.toUpperCase().includes("LUNETTE") === true){
+	if(textbox.value.toUpperCase().includes("LUNETTE") === true){
         answerwritter.innerHTML = lunettes[randomnumperso] === true ? "oui" : "non";
 	}
 
-	else if(textbox.value.toUpperCase() === "A T-IL UNE BARBE ?" || textbox.value.toUpperCase() === "A T IL UNE BARBE" || textbox.value.toUpperCase().includes("BARBE") === true){
+	else if(textbox.value.toUpperCase().includes("BARBE") === true){
         answerwritter.innerHTML = barbe[randomnumperso] === true ? "oui" : "non";
 	}
 
-	else if(textbox.value.toUpperCase() === "A T-IL DES CHEVEUX NOIR ?" || textbox.value.toUpperCase() === "A T IL DES CHEVEUX NOIR" || textbox.value.toUpperCase().includes("CHEVEUX NOIR") === true){
+	else if(textbox.value.toUpperCase().includes("CHEVEUX NOIR") === true){
         answerwritter.innerHTML = haircolor[randomnumperso] === "noir" ? "oui" : "non";
     }
 
-    else if(textbox.value.toUpperCase() === "A T-IL DES CHEVEUX BRUN ?" || textbox.value.toUpperCase() === "A T IL DES CHEVEUX BRUN" || textbox.value.toUpperCase().includes("CHEVEUX BRUN") === true){
+    else if(textbox.value.toUpperCase().includes("CHEVEUX BRUN") === true){
         answerwritter.innerHTML = haircolor[randomnumperso] === "brun" ? "oui" : "non";
     }
 
-    else if(textbox.value.toUpperCase() === "A T-IL DES YEUX MARRON ?" || textbox.value.toUpperCase() === "A T IL DES YEUX MARRON" || textbox.value.toUpperCase().includes("YEUX MARRON") === true){
+    else if(textbox.value.toUpperCase().includes("YEUX MARRON") === true){
         answerwritter.innerHTML = eyescolor[randomnumperso] === "marron" ? "oui" : "non";
     }
 
-    else if(textbox.value.toUpperCase() === "A T-IL DES YEUX GRIS ?" || textbox.value.toUpperCase() === "A T IL DES YEUX GRIS" || textbox.value.toUpperCase().includes("YEUX GRIS") === true){
+    else if(textbox.value.toUpperCase().includes("YEUX GRIS") === true){
         answerwritter.innerHTML = eyescolor[randomnumperso] === "gris" ? "oui" : "non";
+    }
+
+    else if(textbox.value.toUpperCase().includes("AIDE") === true){
+        answerwritter.innerHTML = "Voici la liste des critéres valide sur lesquel vous pouvez poser des questions :" +
+            " <li><ul>Lunette</ul> <ul>Barbe</ul> <ul>Cheveux Noir</ul> <ul>Cheveux Brun</ul> <ul>Yeux Marron</ul> <ul>Yeux Gris</ul></li>";
     }
 
 	else{
